@@ -1,0 +1,25 @@
+Host balanceador
+    HostName 127.0.0.1
+    Port 2229
+    IdentityFile .vagrant/machines/balanceador/virtualbox/private_key
+
+Host web1
+    HostName 192.168.57.11
+    ProxyJump balanceador
+    IdentityFile .vagrant/machines/web1/virtualbox/private_key
+
+Host web2
+    HostName 192.168.57.12
+    ProxyJump balanceador
+    IdentityFile .vagrant/machines/web2/virtualbox/private_key
+
+Host mysql
+    HostName 192.168.58.20
+    ProxyJump balanceador,web1
+    IdentityFile .vagrant/machines/mysql/virtualbox/private_key
+
+Host *
+    User vagrant
+    IdentitiesOnly yes
+    UserKnownHostsFile .vagrant/ssh-known-hosts
+    StrictHostKeyChecking accept-new
